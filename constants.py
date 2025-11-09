@@ -1,5 +1,6 @@
 """
-Game constants and configuration settings for Pixel Art Vampire Cave Crawler
+Game constants and configuration settings for Vampire Cave Explorer
+Top-down world exploration game
 """
 
 # Display settings
@@ -15,22 +16,33 @@ GRAY = (128, 128, 128)
 DARK_GRAY = (64, 64, 64)
 LIGHT_GRAY = (192, 192, 192)
 
-# Tile colors
+# Tile colors - Jungle
 SKY_BLUE = (135, 206, 235)
 NIGHT_SKY = (25, 25, 50)
 GRASS_GREEN = (34, 139, 34)
+JUNGLE_GREEN = (0, 100, 0)
 DIRT_BROWN = (139, 69, 19)
+TREE_GREEN = (0, 128, 0)
+TREE_TRUNK = (101, 67, 33)
+BUSH_GREEN = (60, 179, 113)
+FLOWER_RED = (255, 0, 127)
+FLOWER_YELLOW = (255, 215, 0)
+WATER_BLUE = (30, 144, 255)
+
+# Tile colors - Cave
 STONE_GRAY = (105, 105, 105)
-WOOD_BROWN = (101, 67, 33)
-SAND_YELLOW = (238, 214, 175)
 IRON_GRAY = (192, 192, 192)
 CAVE_DARK = (40, 40, 40)
+CAVE_FLOOR = (60, 60, 60)
 DIAMOND_CYAN = (0, 255, 255)
+PORTAL_PURPLE = (138, 43, 226)
 
 # Entity colors
 PLAYER_RED = (200, 50, 50)
-ZOMBIE_GREEN = (50, 150, 50)
-SKELETON_WHITE = (220, 220, 220)
+TIGER_ORANGE = (255, 140, 0)
+SNAKE_GREEN = (50, 150, 50)
+BEAR_BROWN = (139, 69, 19)
+BAT_GRAY = (100, 100, 100)
 
 # UI colors
 UI_BG = (50, 50, 50, 200)
@@ -38,11 +50,9 @@ HEALTH_RED = (255, 0, 0)
 HUNGER_ORANGE = (255, 165, 0)
 ENERGY_YELLOW = (255, 255, 0)
 
-# Physics
-GRAVITY = 0.8
-JUMP_STRENGTH = -15
-PLAYER_SPEED = 5
-MAX_FALL_SPEED = 20
+# Physics (Top-down movement)
+PLAYER_SPEED = 3
+PLAYER_DIAGONAL_SPEED = 2.1  # Speed when moving diagonally (sqrt(2) factor)
 
 # Player stats
 PLAYER_MAX_HEALTH = 100
@@ -51,26 +61,34 @@ HUNGER_DEPLETION_RATE = 0.01  # Per frame
 INVENTORY_SIZE = 20
 
 # World generation
-WORLD_WIDTH = 200  # In tiles
-WORLD_HEIGHT = 100  # In tiles
-SURFACE_HEIGHT = 30  # Base surface level
-CAVE_START_DEPTH = 40  # Where caves start generating
+WORLD_WIDTH = 150  # In tiles
+WORLD_HEIGHT = 150  # In tiles (for each level)
+
+# World levels
+LEVEL_JUNGLE = "jungle"
+LEVEL_CAVE = "cave"
 
 # Biomes
-BIOME_FOREST = "forest"
-BIOME_DESERT = "desert"
+BIOME_JUNGLE = "jungle"
 BIOME_CAVE = "cave"
 
-# Tile types
+# Tile types - Jungle
 TILE_AIR = 0
-TILE_DIRT = 1
-TILE_STONE = 2
-TILE_GRASS = 3
-TILE_WOOD = 4
-TILE_SAND = 5
-TILE_IRON_ORE = 6
-TILE_DIAMOND_ORE = 7
-TILE_CAVE_WALL = 8
+TILE_GRASS = 1
+TILE_TREE = 2  # Trees to cut for wood
+TILE_BUSH = 3  # Decorative
+TILE_FLOWER = 4  # Decorative
+TILE_WATER = 5  # Impassable
+TILE_DIRT = 6
+
+# Tile types - Cave
+TILE_CAVE_FLOOR = 10
+TILE_CAVE_WALL = 11
+TILE_STONE = 12  # Minable stone
+TILE_IRON_ORE = 13
+TILE_DIAMOND_ORE = 14
+TILE_CAVE_ENTRANCE = 15  # Portal between levels
+TILE_CAVE_EXIT = 16  # Portal between levels
 
 # Item types
 ITEM_WOOD = "wood"

@@ -1,42 +1,43 @@
-# Vampire Cave Crawler
+# Vampire Cave Explorer
 
-A pixel art survival game built with Pygame where you explore a procedurally generated world, gather resources, build your base, and survive the night!
+A top-down pixel art exploration game built with Pygame where you explore a procedurally generated jungle, fight animals, gather resources, descend into caves to mine stones and ores, and survive!
 
 ## Features
 
 ### Core Gameplay
-- **2D Side-scrolling Platformer** with smooth physics
-- **Procedurally Generated World** with different biomes (Forest, Desert, Caves)
-- **Day/Night Cycle** - Enemies spawn at night!
-- **Resource Gathering** - Mine blocks to collect materials
+- **Top-Down Exploration** with smooth 4-directional movement
+- **Two Distinct Levels**:
+  - **Jungle** - Cut trees, fight animals (tigers, snakes, bears), explore during day/night cycle
+  - **Cave** - Mine stones and ores (iron, diamond), fight bats in dark caverns
+- **Portal System** - Seamlessly travel between jungle and cave levels
+- **Resource Gathering** - Cut trees for wood in jungle, mine stones in caves
 - **Crafting System** - Create tools, weapons, and structures
 - **Inventory Management** - Store and manage your items
 - **Survival Mechanics** - Manage health and hunger
-- **Enemy AI** - Zombies and Skeletons that hunt you down!
+- **Animal AI** - Jungle animals hunt you down at night!
 
 ### World Features
-- 200x100 tile procedurally generated world
-- Multiple biomes with unique terrain
-- Underground cave systems
-- Ore deposits (Iron, Diamond)
-- Trees and natural resources
-- Smooth camera following system
+- 150x150 tile procedurally generated world for each level
+- **Jungle Level**:
+  - Dense forests with trees to cut
+  - Water bodies (impassable)
+  - Bushes and flowers
+  - Day/night cycle
+  - Animals spawn at night (tigers, snakes, bears)
+- **Cave Level**:
+  - Procedurally generated cave systems
+  - Minable stone walls
+  - Iron and diamond ore deposits
+  - Bat creatures
+  - Always dark atmosphere
 
 ### Player Mechanics
-- WASD/Arrow keys for movement
-- Jump physics with gravity
-- Mining system with progress indicators
+- **WASD** movement (up, down, left, right)
+- Top-down view with 4-directional sprites
+- Mining/cutting system with progress indicators
 - Tool progression (Wooden → Stone → Iron → Diamond)
 - Health and Hunger bars
-- Animated walking sprites
-
-### Crafting & Progression
-- Workbenches for crafting
-- Tool tiers that affect mining speed
-- Weapons for combat
-- Building blocks (walls, doors)
-- Storage systems (chests)
-- Smelting (furnaces)
+- Level switching via portals
 
 ## Installation
 
@@ -64,12 +65,13 @@ python game.py
 ## Controls
 
 ### Movement
-- **W / Up Arrow / Space** - Jump
+- **W / Up Arrow** - Move Up
+- **S / Down Arrow** - Move Down
 - **A / Left Arrow** - Move Left
 - **D / Right Arrow** - Move Right
 
 ### Actions
-- **Left Click (Hold)** - Mine blocks
+- **Left Click (Hold)** - Cut trees (jungle) / Mine blocks (cave)
 - **I** - Open/Close Inventory
 - **C** - Open/Close Crafting Menu
 - **E** - Eat food (if you have apples/meat)
@@ -81,14 +83,52 @@ python game.py
 
 ## Gameplay Tips
 
-1. **Start by gathering wood** - Punch/mine the brown tree blocks
-2. **Craft a wooden pickaxe** - Press C to open crafting (requires 3 wood)
-3. **Mine stone** - Use your pickaxe on gray stone blocks
-4. **Upgrade your tools** - Better tools mine faster!
-5. **Watch your hunger** - It depletes over time. Gather apples or meat!
-6. **Survive the night** - Enemies spawn when the sky turns dark
-7. **Explore caves** - Find rare ores deep underground
-8. **Build a base** - Place blocks to create shelters
+1. **Start in the Jungle** - You spawn in a grassy area
+2. **Cut trees for wood** - Click and hold on dark green tree tiles
+3. **Find the purple portal** - This leads to the cave (center of map around 75, 75)
+4. **Survive the night** - Animals spawn when it gets dark in the jungle
+5. **Explore the cave** - Mine stone, iron, and diamond ores
+6. **Use portals** - Walk onto purple portal tiles to switch levels
+7. **Craft better tools** - Better pickaxes mine faster
+8. **Watch your hunger** - It depletes over time, eat food to restore it
+9. **Fight animals** - Defeat them for meat drops
+
+## Game Systems
+
+### Level Switching
+- **Jungle → Cave**: Walk onto the purple "Cave Entrance" portal
+- **Cave → Jungle**: Walk onto the purple "Cave Exit" portal
+- Your position is preserved when switching levels
+
+### Resource Gathering
+- **Jungle**: Cut trees and bushes for wood
+- **Cave**: Mine stone walls for stone, search for iron and diamond ores
+- Mining speed depends on your tool quality
+- Progress bar shows mining status
+
+### Health & Hunger
+- Hunger depletes slowly over time
+- When hunger reaches 0, you take damage
+- Eat food (apples, meat) to restore hunger
+- Health decreases from animal attacks
+
+### Day/Night Cycle (Jungle Only)
+- 100-second cycle (60s day + 40s night)
+- Sky changes color based on time
+- Animals spawn during nighttime
+- Cave is always dark
+
+### Enemy AI
+- **Jungle Animals**:
+  - **Tigers**: Tough and aggressive (40 HP, 8 damage)
+  - **Snakes**: Fast and deadly (15 HP, 5 damage)
+  - **Bears**: Slow but powerful (60 HP, 12 damage)
+  - Spawn at night in the jungle
+- **Cave Creatures**:
+  - **Bats**: Quick flyers (20 HP, 6 damage)
+  - Spawn anytime in caves
+- Enemies detect and chase the player
+- Drop meat when defeated (50% chance)
 
 ## Crafting Recipes
 
@@ -109,43 +149,16 @@ python game.py
 - **Wall**: 1x Stone
 - **Door**: 2x Wood
 
-## Game Systems
-
-### Mining
-- Click and hold on blocks to mine them
-- Mining speed depends on your tool
-- Better tools = faster mining
-- Progress bar shows mining status
-
-### Health & Hunger
-- Hunger depletes slowly over time
-- When hunger reaches 0, you take damage
-- Eat food to restore hunger
-- Health regenerates when well-fed
-
-### Day/Night Cycle
-- Each cycle lasts 100 seconds (60 day + 40 night)
-- Sky changes color based on time
-- Enemies spawn during night
-- Build shelter before nightfall!
-
-### Enemy AI
-- Enemies detect players within range
-- They chase and attack when close
-- Different enemy types have different stats
-- Zombies: Slow but tough
-- Skeletons: Fast but fragile
-
 ## File Structure
 
 ```
 experiment-hub/
 ├── game.py          # Main game loop and entry point
 ├── constants.py     # Game configuration and constants
-├── player.py        # Player class with physics and mechanics
-├── world.py         # World generation and tile management
-├── enemy.py         # Enemy AI and spawn system
-├── sprites.py       # Sprite generation and management
+├── player.py        # Player class with top-down movement
+├── world.py         # Jungle and cave level generation
+├── enemy.py         # Animal and creature AI
+├── sprites.py       # Top-down sprite generation
 ├── ui.py            # User interface (HUD, menus, inventory)
 ├── README.md        # This file
 └── requirements.txt # Python dependencies
@@ -156,23 +169,29 @@ experiment-hub/
 - **Resolution**: 1280x720 pixels
 - **Target FPS**: 60
 - **Tile Size**: 16x16 pixels
-- **World Size**: 200x100 tiles (3200x1600 pixels)
-- **Graphics**: Procedurally generated pixel art using colored rectangles
+- **World Size**: 150x150 tiles per level (2400x2400 pixels)
+- **Graphics**: Procedurally generated pixel art using colored shapes
+- **Movement**: Top-down 4-directional with diagonal support
 
-## Future Enhancements
+## Key Differences from Original
 
-Potential additions for future versions:
-- More enemy types
-- Boss battles
-- Weather effects
-- More biomes
-- Advanced building system
-- Multiplayer support
-- Sound effects and music
-- Save/Load system
-- More crafting recipes
-- Farming system
-- NPCs and trading
+This game has been **converted from a platformer to a top-down explorer**:
+
+### What Changed:
+- ❌ **Removed**: Gravity, jumping, side-scrolling physics
+- ✅ **Added**: 4-directional movement, multiple levels, portals
+- 🔄 **Changed**: Side-view sprites → Top-down sprites
+- 🔄 **Changed**: Single continuous world → Two separate levels (Jungle & Cave)
+- 🔄 **Changed**: Zombies/skeletons → Jungle animals and cave creatures
+
+### What Stayed:
+- ✅ Mining and resource gathering
+- ✅ Crafting system
+- ✅ Inventory management
+- ✅ Health and hunger survival
+- ✅ Tool progression
+- ✅ Enemy AI and combat
+- ✅ Day/night cycle (jungle only)
 
 ## Credits
 

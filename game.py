@@ -17,7 +17,7 @@ class Game:
     def __init__(self):
         # Initialize Pygame
         pygame.init()
-        pygame.display.set_caption("Vampire Cave Crawler")
+        pygame.display.set_caption("Vampire Cave Explorer")
 
         # Create display
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -216,15 +216,15 @@ class Game:
             self.ui.draw_menu(self.screen)
 
         elif self.state in [STATE_PLAYING, STATE_PAUSED, STATE_INVENTORY, STATE_CRAFTING]:
-            # Clear screen with sky color
-            sky_color = self.world.get_sky_color(self.game_time)
-            self.screen.fill(sky_color)
+            # Clear screen with background color (changes based on level and time)
+            bg_color = self.world.get_background_color(self.player.current_level, self.game_time)
+            self.screen.fill(bg_color)
 
-            # Draw world
-            self.world.draw(self.screen, self.camera_x, self.camera_y)
+            # Draw world for current level
+            self.world.draw(self.screen, self.camera_x, self.camera_y, self.player.current_level)
 
-            # Draw enemies
-            self.enemy_manager.draw(self.screen, self.camera_x, self.camera_y)
+            # Draw enemies on current level
+            self.enemy_manager.draw(self.screen, self.camera_x, self.camera_y, self.player.current_level)
 
             # Draw player
             self.player.draw(self.screen, self.camera_x, self.camera_y)

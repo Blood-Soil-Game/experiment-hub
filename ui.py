@@ -28,12 +28,18 @@ class UI:
         self._draw_bar(screen, 20, 50, 200, 20, player.hunger, player.max_hunger,
                       HUNGER_ORANGE, "Hunger")
 
-        # Time display
-        cycle_time = time % DAY_CYCLE_LENGTH
-        is_night = cycle_time >= DAY_LENGTH
-        time_text = "Night" if is_night else "Day"
-        time_surface = self.font.render(time_text, True, WHITE)
-        screen.blit(time_surface, (SCREEN_WIDTH - 100, 20))
+        # Current level display
+        level_name = "JUNGLE" if player.current_level == LEVEL_JUNGLE else "CAVE"
+        level_surface = self.font.render(f"Level: {level_name}", True, WHITE)
+        screen.blit(level_surface, (SCREEN_WIDTH - 150, 20))
+
+        # Time display (only in jungle)
+        if player.current_level == LEVEL_JUNGLE:
+            cycle_time = time % DAY_CYCLE_LENGTH
+            is_night = cycle_time >= DAY_LENGTH
+            time_text = "Night" if is_night else "Day"
+            time_surface = self.font.render(time_text, True, WHITE)
+            screen.blit(time_surface, (SCREEN_WIDTH - 150, 50))
 
         # Quick inventory (bottom of screen)
         self._draw_quick_inventory(screen, player)
